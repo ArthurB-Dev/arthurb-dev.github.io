@@ -4,6 +4,72 @@
 @use '../abstracts/placeholders';
 @use '../themes/light';
 @use '../themes/dark';
+@use '../themes/classic-light';
+@use '../themes/classic-dark';
+@use '../themes/nord-light';
+@use '../themes/nord-dark';
+@use '../themes/iceberg-light';
+@use '../themes/iceberg-dark';
+@use '../themes/dracula-light';
+@use '../themes/dracula-dark';
+@use '../themes/github-light';
+@use '../themes/github-dark';
+
+@mixin apply-theme-palette($mode) {
+  &:not([data-theme]),
+  &[data-theme]:not([data-theme='classic']):not([data-theme='catppuccin']):not(
+      [data-theme='nord']
+    ):not([data-theme='iceberg']):not([data-theme='dracula']):not(
+      [data-theme='github']
+    ),
+  &[data-theme='catppuccin'] {
+    @if $mode == 'light' {
+      @include light.styles;
+    } @else {
+      @include dark.styles;
+    }
+  }
+
+  &[data-theme='classic'] {
+    @if $mode == 'light' {
+      @include classic-light.styles;
+    } @else {
+      @include classic-dark.styles;
+    }
+  }
+
+  &[data-theme='nord'] {
+    @if $mode == 'light' {
+      @include nord-light.styles;
+    } @else {
+      @include nord-dark.styles;
+    }
+  }
+
+  &[data-theme='iceberg'] {
+    @if $mode == 'light' {
+      @include iceberg-light.styles;
+    } @else {
+      @include iceberg-dark.styles;
+    }
+  }
+
+  &[data-theme='dracula'] {
+    @if $mode == 'light' {
+      @include dracula-light.styles;
+    } @else {
+      @include dracula-dark.styles;
+    }
+  }
+
+  &[data-theme='github'] {
+    @if $mode == 'light' {
+      @include github-light.styles;
+    } @else {
+      @include github-dark.styles;
+    }
+  }
+}
 
 :root {
   font-size: 16px;
@@ -13,22 +79,22 @@ html {
   @media (prefers-color-scheme: light) {
     &:not([data-mode]),
     &[data-mode='light'] {
-      @include light.styles;
+      @include apply-theme-palette('light');
     }
 
     &[data-mode='dark'] {
-      @include dark.styles;
+      @include apply-theme-palette('dark');
     }
   }
 
   @media (prefers-color-scheme: dark) {
     &:not([data-mode]),
     &[data-mode='dark'] {
-      @include dark.styles;
+      @include apply-theme-palette('dark');
     }
 
     &[data-mode='light'] {
-      @include light.styles;
+      @include apply-theme-palette('light');
     }
   }
 
@@ -366,7 +432,9 @@ main {
   box-shadow: none;
   border-color: var(--input-focus-border-color) !important;
   background: center !important;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  transition:
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
 }
 
 .left {

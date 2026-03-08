@@ -1,0 +1,122 @@
+@use '../abstracts/variables' as v;
+@use '../abstracts/breakpoints' as bp;
+@use '../abstracts/placeholders';
+
+#theme-settings-popup {
+  border-color: var(--toc-popup-border-color);
+  border-width: 1px;
+  border-radius: v.$radius-lg;
+  color: var(--text-color);
+  background: var(--card-bg);
+  margin-top: v.$topbar-height;
+  min-width: 20rem;
+  width: min(38rem, calc(100vw - 2rem));
+  font-size: 1.05rem;
+
+  &[open] {
+    animation: slide-in 0.3s ease-out;
+  }
+
+  &[closing] {
+    animation: slide-out 0.3s ease-out;
+  }
+
+  .header {
+    @extend %btn-color;
+
+    position: sticky;
+    top: 0;
+    background-color: inherit;
+    border-bottom: 1px solid var(--main-border-color);
+
+    .label {
+      font-family: v.$font-family-heading;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+  }
+
+  button {
+    &:focus-visible {
+      box-shadow: none;
+    }
+  }
+
+  &::backdrop {
+    backdrop-filter: blur(5px);
+  }
+
+  @include bp.lg {
+    margin-left: calc(v.$sidebar-width / 2);
+  }
+}
+
+#theme-settings-popup-content {
+  max-height: calc(100vh - 5 * v.$topbar-height);
+  overflow: auto;
+}
+
+.theme-settings-section + .theme-settings-section {
+  margin-top: 1.5rem;
+}
+
+.theme-settings-subtitle {
+  font-family: v.$font-family-heading;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--heading-color);
+}
+
+.theme-option-grid {
+  display: grid;
+  gap: 0.65rem;
+
+  @include bp.sm {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.theme-option {
+  border: 1px solid var(--btn-border-color);
+  border-radius: v.$radius-sm;
+  background: var(--button-bg);
+  color: var(--text-color);
+  text-align: left;
+  padding: 0.65rem 0.8rem;
+  line-height: 1.35;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background: var(--sidebar-hover-bg);
+  }
+
+  &[aria-checked='true'] {
+    border-color: var(--link-color);
+    box-shadow: inset 0 0 0 1px var(--link-color);
+    background: var(--sidebar-hover-bg);
+  }
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: var(--main-border-color);
+    background: var(--card-bg);
+  }
+}
+
+.theme-option-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+}
+
+.theme-option-description {
+  font-size: 0.85rem;
+  color: var(--text-muted-color);
+}

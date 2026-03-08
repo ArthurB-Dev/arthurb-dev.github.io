@@ -1,0 +1,26 @@
+default: catppuccin
+items:
+  - id: catppuccin
+    name: Catppuccin
+    description: Macchiato in dark mode and Latte in light mode
+    modes: [light, dark]
+  - id: classic
+    name: Classic Chirpy
+    description: Original Chirpy light and dark palettes
+    modes: [light, dark]
+  - id: nord
+    name: Nord
+    description: Frosty blue-gray tones for both light and dark mode
+    modes: [light, dark]
+  - id: iceberg
+    name: Iceberg
+    description: Cool, muted contrasts inspired by the Iceberg palette
+    modes: [light, dark]
+  - id: dracula
+    name: Dracula
+    description: Vibrant purple-forward palette with light and dark variants
+    modes: [light, dark]
+  - id: github
+    name: GitHub
+    description: Familiar GitHub-style color system for light and dark
+    modes: [light, dark]

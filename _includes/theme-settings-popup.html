@@ -1,0 +1,49 @@
+{% assign theme_palette_data = site.data['theme-palettes'] %}
+{% assign default_palette = theme_palette_data.default | default: 'catppuccin' %}
+
+<dialog id="theme-settings-popup" class="p-0" aria-labelledby="theme-settings-title">
+  <div class="header d-flex align-items-center justify-content-between px-4 py-2">
+    <div class="label" id="theme-settings-title">Theme Settings</div>
+    <button id="theme-settings-close" type="button" class="btn mx-1 my-1 opacity-75" aria-label="Close">
+      <i class="fas fa-xmark"></i>
+    </button>
+  </div>
+
+  <div id="theme-settings-popup-content" class="px-4 py-3 pb-4">
+    {% unless site.theme_mode %}
+      <section class="theme-settings-section">
+        <h3 class="theme-settings-subtitle">Mode</h3>
+        <div class="theme-option-grid" role="radiogroup" aria-label="Theme mode">
+          {% comment %} <button type="button" class="theme-option" data-theme-mode-value="system">System</button> {% endcomment %}
+          <button type="button" class="theme-option" data-theme-mode-value="light">Light</button>
+          <button type="button" class="theme-option" data-theme-mode-value="dark">Dark</button>
+        </div>
+      </section>
+    {% endunless %}
+
+    <section class="theme-settings-section">
+      <h3 class="theme-settings-subtitle">Palette</h3>
+      <div class="theme-option-grid" role="radiogroup" aria-label="Theme palette">
+        {% for item in theme_palette_data.items %}
+          {% if item.modes %}
+            {% assign supported_modes = item.modes | join: ',' %}
+          {% else %}
+            {% assign supported_modes = 'light,dark' %}
+          {% endif %}
+          <button
+            type="button"
+            class="theme-option"
+            data-theme-palette-value="{{ item.id }}"
+            data-theme-supported-modes="{{ supported_modes }}"
+            {% if item.id == default_palette %}
+              data-default-theme-palette="true"
+            {% endif %}
+          >
+            <span class="theme-option-title">{{ item.name }}</span>
+            <span class="theme-option-description">{{ item.description }}</span>
+          </button>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+</dialog>
