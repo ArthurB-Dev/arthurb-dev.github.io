@@ -1,8 +1,9 @@
 ---
 layout: post
 title: Start Here
+description: An Intro
 date: 2025-09-03 18:40 +0100
-categories:
+categories: [Life, About Me]
 tags: [personal]
 ---
 Hi, I’m Arthur!

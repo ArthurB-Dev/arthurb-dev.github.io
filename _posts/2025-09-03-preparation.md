@@ -1,8 +1,9 @@
 ---
 layout: post
 title: Preparation
+description: Getting ready to go head first into some real engineering
 date: 2025-09-03 20:05 +0100
-categories:
+categories: [Life, University Life]
 tags: [personal, university]
 ---
 
