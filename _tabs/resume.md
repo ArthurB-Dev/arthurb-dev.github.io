@@ -3,6 +3,7 @@ layout: page
 title: My CV
 icon: fas fa-file
 order: 3
+permalink: /cv/
 ---
 
 > Some personal information removed
